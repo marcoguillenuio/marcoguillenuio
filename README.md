@@ -4,5 +4,4 @@
 - 💞️ I’m looking to collaborate on all projects
 - 📫 How to reach me marcoguillenuio
 
-..............
-....x..xxxxxxx...............................................................................................
+.
