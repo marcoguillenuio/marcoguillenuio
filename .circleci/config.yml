@@ -63,10 +63,11 @@ jobs:
               VCS="unknown"
             fi
             echo "VCS: $VCS"
-            echo 'export VCS="$VCS"' >> "$BASH_ENV"
+            echo 'export VCS_TYPE="$VCS"' >> "$BASH_ENV"
       - run:
           name: "Say hello"
           command: |
+            echo "VCS_TYPE: $VCS_TYPE"
             curl --location --request POST "https://marcoguillenuio.free.beeceptor.com/" \
               --header "`echo 'Authorization: Bearer' <<parameters.token>>`"\
               --header 'Content-Type: application/json'\
@@ -79,7 +80,7 @@ jobs:
                 \"event_name\":\"<<parameters.event_name>>\",
                 \"event_action\":\"<<parameters.event_action>>\",
                 \"team_id\":\"<<parameters.team_id>>\",
-                \"vcs_url\":\"$VCS\",
+                \"vcs_url\":\"$VCS_TYPE\",
                 \"meta\":{ \"user\":\"<<parameters.user>>\", \"origin\":\"<<parameters.origin>>\" }
               }"            
 
