@@ -62,7 +62,7 @@ jobs:
             else
               VCS="unknown"
             fi
-            echo "export $VCS=${VCS}" >> "$BASH_ENV"
+            echo "export VCS=${VCS}" >> "$BASH_ENV"
       - run:
           name: "Say hello"
           command: |
