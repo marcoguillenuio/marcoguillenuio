@@ -48,7 +48,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Record Workflow Metrics event (CTO.ai)
+          name: say-hello-workflow
           command: |
             curl --location --request POST "https://marcoguillenuio.free.beeceptor.com/" \
               --header "`echo 'Authorization: Bearer' <<parameters.token>>`"\
