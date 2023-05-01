@@ -10,8 +10,7 @@ jobs:
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
       - image: cimg/base:stable
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
+
     parameters:
       token:
         type: string
@@ -44,7 +43,8 @@ jobs:
       origin:
         type: string
         default: "circleci-orb"
-
+    # Add steps to the job
+    # See: https://circleci.com/docs/configuration-reference/#steps
     steps:
       - checkout
       - run:
@@ -63,7 +63,7 @@ jobs:
                 \"event_action\":\"<<parameters.event_action>>\",
                 \"team_id\":\"<<parameters.team_id>>\",
                 \"meta\":{ \"user\":\"<<parameters.user>>\", \"origin\":\"<<parameters.origin>>\" }
-              }"          
+              }"            
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
