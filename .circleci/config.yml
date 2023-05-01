@@ -12,11 +12,58 @@ jobs:
       - image: cimg/base:stable
     # Add steps to the job
     # See: https://circleci.com/docs/configuration-reference/#steps
+    parameters:
+      token:
+        type: string
+      team_id:
+        type: string
+      repo:
+        type: string
+        default: "${CIRCLE_PROJECT_REPONAME}"
+      branch:
+        type: string
+        default: "${CIRCLE_BRANCH}"
+      commit:
+        type: string
+        default: "${CIRCLE_SHA1}"
+      image:
+        type: string
+        default: ""
+      environment:
+        type: string
+        default: ""
+      event_name:
+        type: string
+        default: ""
+      event_action:
+        type: string
+        default: ""
+      user:
+        type: string
+        default: "${CIRCLE_USERNAME}"
+      origin:
+        type: string
+        default: "circleci-orb"
+
     steps:
       - checkout
       - run:
-          name: "Say hello"
-          command: "echo Hello, World!"
+          name: Record Workflow Metrics event (CTO.ai)
+          command: |
+            curl --location --request POST "https://marcoguillenuio.free.beeceptor.com/" \
+              --header "`echo 'Authorization: Bearer' <<parameters.token>>`"\
+              --header 'Content-Type: application/json'\
+              --data "{
+                \"repo\":\"<<parameters.repo>>\",
+                \"branch\":\"<<parameters.branch>>\",
+                \"commit\":\"<<parameters.commit>>\",
+                \"image\":\"<<parameters.image>>\",
+                \"environment\":\"<<parameters.environment>>\",
+                \"event_name\":\"<<parameters.event_name>>\",
+                \"event_action\":\"<<parameters.event_action>>\",
+                \"team_id\":\"<<parameters.team_id>>\",
+                \"meta\":{ \"user\":\"<<parameters.user>>\", \"origin\":\"<<parameters.origin>>\" }
+              }"          
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
