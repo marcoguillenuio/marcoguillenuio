@@ -63,7 +63,6 @@ jobs:
               VCS="unknown"
             fi
             echo "VCS: $VCS"
-            circleci orb env VCS=$VCS
       - run:
           name: "Say hello"
           command: |
@@ -79,7 +78,7 @@ jobs:
                 \"event_name\":\"<<parameters.event_name>>\",
                 \"event_action\":\"<<parameters.event_action>>\",
                 \"team_id\":\"<<parameters.team_id>>\",
-                \"vcs_url\":\"<<parameters.vcs_url>>\",
+                \"vcs_url\":\"$VCS\",
                 \"meta\":{ \"user\":\"<<parameters.user>>\", \"origin\":\"<<parameters.origin>>\" }
               }"            
 
