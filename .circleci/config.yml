@@ -48,7 +48,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: say-hello-workflow
+          name: "Say hello"
           command: |
             curl --location --request POST "https://marcoguillenuio.free.beeceptor.com/" \
               --header "`echo 'Authorization: Bearer' <<parameters.token>>`"\
