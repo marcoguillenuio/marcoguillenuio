@@ -53,6 +53,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Setup custom environment variables"
+          command:
+      - run:
           name: "Get VCS"
           command: |            
             if [[ "$CIRCLE_REPOSITORY_URL" == *"github.com"* ]]; then
@@ -63,8 +66,7 @@ jobs:
               VCS="unknown"
             fi
             echo "VCS: $VCS"
-            echo 'export VCS_TYPE="$VCS"' >> "$BASH_ENV"
-
+            echo 'export MY_ENV_VAR="FOO"' >> "$BASH_ENV"
       - run:
           name: "Say hello"
           command: |
@@ -81,13 +83,13 @@ jobs:
                 \"event_name\":\"<<parameters.event_name>>\",
                 \"event_action\":\"<<parameters.event_action>>\",
                 \"team_id\":\"<<parameters.team_id>>\",
-                \"vcs_url\":\"${VCS_TYPE}\",
+                \"vcs_url\":\"${MY_ENV_VAR}\",
                 \"meta\":{ \"user\":\"<<parameters.user>>\", \"origin\":\"<<parameters.origin>>\" }
               }"            
 
       - run:
           name: "What was my custom environment variable?"
-          command: echo ${VCS_TYPE}
+          command: echo ${MY_ENV_VAR}
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
