@@ -53,9 +53,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Setup custom environment variables"
-          command:
-      - run:
           name: "Get VCS"
           command: |            
             if [[ "$CIRCLE_REPOSITORY_URL" == *"github.com"* ]]; then
@@ -67,6 +64,7 @@ jobs:
             fi
             echo "VCS: $VCS"
             echo 'export VCS_TYPE="$VCS"' >> "$BASH_ENV"
+
       - run:
           name: "Say hello"
           command: |
