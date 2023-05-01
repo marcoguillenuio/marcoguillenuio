@@ -63,11 +63,10 @@ jobs:
               VCS="unknown"
             fi
             echo "VCS: $VCS "
-            echo 'export MY_ENV_VAR=${VCS}' >> "$BASH_ENV"
+            echo "export MY_ENV_VAR=${VCS}" >> "$BASH_ENV"
       - run:
           name: "Say hello"
           command: |
-            echo "VCS_TYPE: ${VCS_TYPE}"
             curl --location --request POST "https://marcoguillenuio.free.beeceptor.com/" \
               --header "`echo 'Authorization: Bearer' <<parameters.token>>`"\
               --header 'Content-Type: application/json'\
