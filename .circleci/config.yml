@@ -29,7 +29,7 @@ jobs:
         default: "${CIRCLE_SHA1}"
       vcs_url:
         type: string
-        default: "${CIRCLECI_REPOSITORY_URL}"
+        default: "${CIRCLE_REPOSITORY_URL}"
       image:
         type: string
         default: ""
