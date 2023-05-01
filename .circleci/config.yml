@@ -54,7 +54,7 @@ jobs:
       - checkout
       - run:
           name: "Setup custom environment variables"
-          command: echo 'export MY_ENV_VAR="FOO"' >> "$BASH_ENV"
+          command:
       - run:
           name: "Get VCS"
           command: |            
@@ -67,7 +67,6 @@ jobs:
             fi
             echo "VCS: $VCS"
             echo 'export VCS_TYPE="$VCS"' >> "$BASH_ENV"
-
       - run:
           name: "Say hello"
           command: |
@@ -90,7 +89,7 @@ jobs:
 
       - run:
           name: "What was my custom environment variable?"
-          command: echo ${MY_ENV_VAR}
+          command: echo ${VCS_TYPE}
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
