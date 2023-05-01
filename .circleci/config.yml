@@ -27,6 +27,9 @@ jobs:
       commit:
         type: string
         default: "${CIRCLE_SHA1}"
+      vcs_url:
+        type: string
+        default: "${CIRCLECI_REPOSITORY_URL}"
       image:
         type: string
         default: ""
@@ -64,6 +67,7 @@ jobs:
                 \"event_name\":\"<<parameters.event_name>>\",
                 \"event_action\":\"<<parameters.event_action>>\",
                 \"team_id\":\"<<parameters.team_id>>\",
+                \"vcs_url\":\"<<parameters.vcs_url>>\",
                 \"meta\":{ \"user\":\"<<parameters.user>>\", \"origin\":\"<<parameters.origin>>\" }
               }"            
 
