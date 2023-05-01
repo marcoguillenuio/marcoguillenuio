@@ -53,6 +53,18 @@ jobs:
     steps:
       - checkout
       - run:
+          name: "Get VCS"
+          command: |            
+            if [[ "$CIRCLE_REPOSITORY_URL" == *"github.com"* ]]; then
+              VCS="github"
+            elif [[ "$CIRCLE_REPOSITORY_URL" == *"bitbucket.org"* ]]; then
+              VCS="bitbucket"
+            else
+              VCS="unknown"
+            fi
+            echo "VCS: $VCS"
+            circleci orb env VCS=$VCS
+      - run:
           name: "Say hello"
           command: |
             curl --location --request POST "https://marcoguillenuio.free.beeceptor.com/" \
