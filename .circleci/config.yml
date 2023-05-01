@@ -63,6 +63,8 @@ jobs:
               VCS="unknown"
             fi
             echo "VCS: $VCS"
+            environment:
+              VCS: $VCS
       - run:
           name: "Say hello"
           command: |
