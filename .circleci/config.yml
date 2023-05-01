@@ -67,7 +67,7 @@ jobs:
       - run:
           name: "Say hello"
           command: |
-            echo "VCS_TYPE: $VCS_TYPE"
+            echo "VCS_TYPE: ${VCS_TYPE}"
             curl --location --request POST "https://marcoguillenuio.free.beeceptor.com/" \
               --header "`echo 'Authorization: Bearer' <<parameters.token>>`"\
               --header 'Content-Type: application/json'\
@@ -80,7 +80,7 @@ jobs:
                 \"event_name\":\"<<parameters.event_name>>\",
                 \"event_action\":\"<<parameters.event_action>>\",
                 \"team_id\":\"<<parameters.team_id>>\",
-                \"vcs_url\":\"$VCS_TYPE\",
+                \"vcs_url\":\"${VCS_TYPE}\",
                 \"meta\":{ \"user\":\"<<parameters.user>>\", \"origin\":\"<<parameters.origin>>\" }
               }"            
 
