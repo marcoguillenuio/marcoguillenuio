@@ -14,8 +14,10 @@ jobs:
     parameters:
       token:
         type: string
+        default: ""
       team_id:
         type: string
+        default: ""
       repo:
         type: string
         default: "${CIRCLE_PROJECT_REPONAME}"
