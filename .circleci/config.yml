@@ -48,8 +48,9 @@ jobs:
       origin:
         type: string
         default: "circleci-orb"
-    # Add steps to the job
-    # See: https://circleci.com/docs/configuration-reference/#steps
+
+
+
     steps:
       - checkout
       - run:
@@ -60,15 +61,16 @@ jobs:
             elif [[ "$CIRCLE_REPOSITORY_URL" == *"bitbucket.org"* ]]; then
               VCS="bitbucket"
             else
-              VCS="unknown"
+              VCS="gitlab"
             fi
             echo "export VCS=${VCS}" >> "$BASH_ENV"
       - run:
-          name: "Say hello"
+          name: "Record Workflow Metrics event (CTO.ai)"
           command: |
             curl --location --request POST "https://marcoguillenuio.free.beeceptor.com/" \
               --header "`echo 'Authorization: Bearer' <<parameters.token>>`"\
               --header 'Content-Type: application/json'\
+              --header "x-ops-mechanism: circle-ci-${VCS}"\
               --data "{
                 \"repo\":\"<<parameters.repo>>\",
                 \"branch\":\"<<parameters.branch>>\",
