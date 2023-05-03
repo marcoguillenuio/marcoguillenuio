@@ -63,7 +63,6 @@ jobs:
             else
               VCS="gitlab"
             fi
-            echo "export VCS=${VCS}" >> "$BASH_ENV"
       - run:
           name: "Record Workflow Metrics event (CTO.ai)"
           command: |
@@ -79,8 +78,7 @@ jobs:
                 \"environment\":\"<<parameters.environment>>\",
                 \"event_name\":\"<<parameters.event_name>>\",
                 \"event_action\":\"<<parameters.event_action>>\",
-                \"team_id\":\"<<parameters.team_id>>\",
-                \"vcs\":\"${VCS}\",
+                \"team_id\":\"<<parameters.team_id>>\",            
                 \"meta\":{ \"user\":\"<<parameters.user>>\", \"origin\":\"<<parameters.origin>>\" }
               }"
 # Orchestrate jobs using workflows
