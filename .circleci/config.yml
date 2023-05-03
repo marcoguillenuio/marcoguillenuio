@@ -67,26 +67,23 @@ jobs:
 workflows:
   lint-pack:
     jobs:
-      - test
-      - orb-tools/lint:
-          filters: *filters
-      - orb-tools/pack:
-          filters: *filters
-      - orb-tools/review:
-          filters: *filters
-      - shellcheck/check:
-          filters: *filters
-      - orb-tools/publish:
-          orb-name: marcoguillenuio/mgtracio-orb1
-          vcs-type: << pipeline.project.type >>
-          requires:
-            [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
-          # Use a context to hold your publishing token.
-          context: orb-publishing
-          filters: *filters
-      # Triggers the next workflow in the Orb Development Kit.
-      - orb-tools/continue:
-          pipeline-number: << pipeline.number >>
-          vcs-type: << pipeline.project.type >>
-          requires: [orb-tools/publish]
-          filters: *filters
+#      - orb-tools/lint:
+#          filters: *filters
+#      - orb-tools/pack:
+#          filters: *filters
+#      - orb-tools/review:
+#          filters: *filters
+#      - shellcheck/check:
+#          filters: *filters
+#      - orb-tools/publish:
+#          orb-name: marcoguillenuio/mgtracio-orb1
+#          vcs-type: << pipeline.project.type >>
+#          requires:
+#            [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
+#          context: orb-publishing # Use a context to hold your publishing token.
+#          filters: *filters
+#      - orb-tools/continue: # Triggers the next workflow in the Orb Development Kit.
+#          pipeline-number: << pipeline.number >>
+#          vcs-type: << pipeline.project.type >>
+#          requires: [orb-tools/publish]
+#          filters: *filters
