@@ -1,24 +1,89 @@
 version: 2.1
-description: "Example showing how to send a workflow metric events to CTO.ai. Set CTOAI_EVENTS_API_TOKEN and CTOAI_EVENTS_API_TEAM_ID env vars in CircleCI settings."
-
+setup: true
 orbs:
-  cto-ai: cto-ai/cto-ai@a8c3c65efd41bea4547a79d05bfde8b01fbebf08
+  orb-tools: circleci/orb-tools@11.5
+  shellcheck: circleci/shellcheck@3.1
 
+filters: &filters
+  tags:
+    only: /.*/
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
-  orb_test:
-    docker:
-      - image: cimg/base:stable
-    steps:
-      - cto-ai/event:
-          token: ${CTOAI_EVENTS_API_TOKEN}
-          team_id: ${CTOAI_EVENTS_API_TEAM_ID}
-          image: app78df3bl2
-          environment: staging
-          event_name: deployment
-          event_action: succeeded
-          origin: circleci-orb
+  test:
+    parameters:
+      token:
+        type: string
+        default: ""
+      team_id:
+        type: string
+        default: ""
+      repo:
+        type: string
+        default: "${CIRCLE_PROJECT_REPONAME}"
+      branch:
+        type: string
+        default: "${CIRCLE_BRANCH}"
+      commit:
+        type: string
+        default: "${CIRCLE_SHA1}"
+      vcs_url:
+        type: string
+        default: "${CIRCLE_REPOSITORY_URL}"
+      image:
+        type: string
+        default: ""
+      environment:
+        type: string
+        default: ""
+      event_name:
+        type: string
+        default: ""
+      event_action:
+        type: string
+        default: ""
+      user:
+        type: string
+        default: "${CIRCLE_USERNAME}"
+      origin:
+        type: string
+        default: "circleci-orb"
 
+
+
+    steps:
+      - run:
+          name: "Get VCS"
+          command: |
+            if [[ "$CIRCLE_REPOSITORY_URL" == *"github.com"* ]]; then
+              VCS="github"
+            elif [[ "$CIRCLE_REPOSITORY_URL" == *"bitbucket.org"* ]]; then
+              VCS="bitbucket"
+            else
+              VCS="gitlab"
+            fi
+            echo "VCS: $VCS"
 workflows:
-  orb_test_workflow:
+  lint-pack:
     jobs:
-      - orb_test
+      - orb-tools/lint:
+          filters: *filters
+      - orb-tools/pack:
+          filters: *filters
+      - orb-tools/review:
+          filters: *filters
+      - shellcheck/check:
+          filters: *filters
+      - orb-tools/publish:
+          orb-name: marcoguillenuio/mgtracio-orb1
+          vcs-type: << pipeline.project.type >>
+          requires:
+            [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
+          context: orb-publishing # Use a context to hold your publishing token.
+          filters: *filters
+      - orb-tools/continue: # Triggers the next workflow in the Orb Development Kit.
+          pipeline-number: << pipeline.number >>
+          vcs-type: << pipeline.project.type >>
+          requires: [orb-tools/publish]
+          filters: *filters
