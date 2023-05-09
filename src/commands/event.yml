@@ -36,15 +36,7 @@ parameters:
 steps:
   - run:
       name: Get VCS
-      command: |
-        if [[ "$CIRCLE_REPOSITORY_URL" == *"github.com"* ]]; then
-          VCS="github"
-        elif [[ "$CIRCLE_REPOSITORY_URL" == *"bitbucket.org"* ]]; then
-          VCS="bitbucket"
-        else
-          VCS="gitlab"
-        fi
-        echo "VCS: $VCS"
+      command: <<include(scripts/event.sh)>>
   - run:
       name: Record Workflow Metrics event (CTO.ai)
       command: |
