@@ -25,7 +25,7 @@ workflows:
             [orb-tools/lint, orb-tools/review, orb-tools/pack, shellcheck/check]
           context: orb-publishing # Use a context to hold your publishing token.
           filters: *filters
-      - orb-tools/continue: # Triggers the next workflow in the Orb Development Kit.
+      - orb-tools/continue: # Triggers the next workflow in the Orb Development Kit
           pipeline-number: << pipeline.number >>
           vcs-type: << pipeline.project.type >>
           requires: [orb-tools/publish]
