@@ -1,4 +1,6 @@
 #!/bin/bash
+echo "111 Bearer' ${TOKEN}"
+
 curl --location --request POST "https://events.stg.cto.ai" \
   --header "echo 'Authorization: Bearer' ${TOKEN}"\
   --header 'Content-Type: application/json'\
