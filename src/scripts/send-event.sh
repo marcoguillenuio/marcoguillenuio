@@ -1,6 +1,4 @@
 #!/bin/bash
-echo " TOKEN: ${TOKEN}"
-
 curl --location --request POST "https://events.stg.cto.ai" \
   --header "Authorization: Bearer ${TOKEN}"\
   --header "x-ops-mechanism: circle-ci"\

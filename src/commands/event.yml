@@ -41,15 +41,15 @@ steps:
       environment:
         TOKEN: <<parameters.token>>
         VCS_TYPE: <<parameters.vcs_type>>
-        REPO: ${CIRCLE_PROJECT_REPONAME}
-        BRANCH: ${CIRCLE_BRANCH}
+        REPO: <<parameters.repo>>
+        BRANCH: <<parameters.branch>>
         COMMIT: <<parameters.commit>>
         IMAGE: <<parameters.image>>
         ENVIRONMENT: <<parameters.environment>>
         EVENT_NAME: <<parameters.event_name>>
         EVENT_ACTION: <<parameters.event_action>>
         TEAM_ID: <<parameters.team_id>>
-        USER: ${CIRCLE_USERNAME}
+        USER: <<parameters.user>>
         ORIGIN: <<parameters.origin>>
       name: Record Workflow Metrics event (CTO.ai)
       command: <<include(scripts/send-event.sh)>>
