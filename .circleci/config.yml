@@ -16,7 +16,7 @@ jobs:
             environment: staging
             event_name: deployment
             event_action: succeeded
-            origin: circleci-orb
+            origin: circleci-orb2
             vcs_type: gitlab
             branch: main
             repo: marcoguillenuio/marcoguillenuio-orb
