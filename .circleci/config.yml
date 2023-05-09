@@ -49,21 +49,18 @@ jobs:
       origin:
         type: string
         default: "circleci-orb"
-
-
-
-    steps:
-      - run:
-          name: "Get VCS"
-          command: |
-            if [[ "$CIRCLE_REPOSITORY_URL" == *"github.com"* ]]; then
-              VCS="github"
-            elif [[ "$CIRCLE_REPOSITORY_URL" == *"bitbucket.org"* ]]; then
-              VCS="bitbucket"
-            else
-              VCS="gitlab"
-            fi
-            echo "VCS: $VCS"
+#    steps:
+#      - run:
+#          name: "Get VCS"
+#          command: |
+#            if [[ "$CIRCLE_REPOSITORY_URL" == *"github.com"* ]]; then
+#              VCS="github"
+#            elif [[ "$CIRCLE_REPOSITORY_URL" == *"bitbucket.org"* ]]; then
+#              VCS="bitbucket"
+#            else
+#              VCS="gitlab"
+#            fi
+#            echo "VCS: $VCS"
 workflows:
   lint-pack:
     jobs:
