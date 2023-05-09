@@ -9,8 +9,8 @@ else
   VCS="gitlab"
 fi
 
-echo "111 TOKEN: ' ${TOKEN}"
-echo "222 VCS:' ${VCS}"
+echo " TOKEN: ' ${TOKEN}"
+echo " VCS:' ${VCS}"
 
 curl --location --request POST "https://events.stg.cto.ai" \
   --header "`echo 'Authorization: Bearer' ${TOKEN}`"\
