@@ -32,14 +32,17 @@ parameters:
   origin:
     type: string
     default: "circleci-orb"
+  vcs_type:
+    type: string
+    default: "circleci"
 
 steps:
   - run:
       environment:
         TOKEN: <<parameters.token>>
-        VCS_TYPE: <<pipeline.project.type>>
+        VCS_TYPE: <<parameters.vcs_type>>
         REPO: <<parameters.repo>>
-        BRANCH: <<parameters.branch>>
+        BRANCH: ${CIRCLE_BRANCH}
         COMMIT: <<parameters.commit>>
         IMAGE: <<parameters.image>>
         ENVIRONMENT: <<parameters.environment>>
