@@ -14,7 +14,7 @@ echo "111  TOKEN' ${TOKEN}"
 echo "222 VCS' ${VCS}"
 
 curl --location --request POST "https://events.stg.cto.ai" \
-  --header "`echo 'Authorization: Bearer' ${TOKEN}`"\
+  --header "Authorization: Bearer' ${TOKEN}"\
   --header "x-ops-mechanism: circle-ci-${VCS}"\
   --header 'Content-Type: application/json'\
   --data "{
