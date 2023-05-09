@@ -14,8 +14,8 @@ workflows:
           filters: *filters
       - orb-tools/pack:
           filters: *filters
-#      - orb-tools/review:
-#          filters: *filters
+      - orb-tools/review:
+          filters: *filters
       - shellcheck/check:
           filters: *filters
       - orb-tools/publish:
