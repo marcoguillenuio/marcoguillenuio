@@ -1,82 +1,24 @@
-# Use the latest 2.1 version of CircleCI pipeline process engine.
-# See: https://circleci.com/docs/configuration-reference
 version: 2.1
+description: "Example showing how to send a workflow metric events to CTO.ai. Set CTOAI_EVENTS_API_TOKEN and CTOAI_EVENTS_API_TEAM_ID env vars in CircleCI settings."
 
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/configuration-reference/#jobs
+orbs:
+  cto-ai: cto-ai/cto-ai@1.0.2
+
 jobs:
-  say-hello:
-    # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
-    # See: https://circleci.com/docs/configuration-reference/#executor-job
+  events_example_job:
     docker:
       - image: cimg/base:stable
-    description: "Send a workflow metric event to the CTO.ai events API."
-    parameters:
-      token:
-        type: string
-      team_id:
-        type: string
-      repo:
-        type: string
-        default: "${CIRCLE_PROJECT_REPONAME}"
-      branch:
-        type: string
-        default: "${CIRCLE_BRANCH}"
-      commit:
-        type: string
-        default: "${CIRCLE_SHA1}"
-      image:
-        type: string
-        default: ""
-      environment:
-        type: string
-        default: ""
-      event_name:
-        type: string
-        default: ""
-      event_action:
-        type: string
-        default: ""
-      user:
-        type: string
-        default: "${CIRCLE_USERNAME}"
-      origin:
-        type: string
-        default: "circleci-orb"
     steps:
-      - run:
-          name: Get VCS
-          command: |
-            if [[ "$CIRCLE_REPOSITORY_URL" == *"github.com"* ]]; then
-              VCS="github"
-            elif [[ "$CIRCLE_REPOSITORY_URL" == *"bitbucket.org"* ]]; then
-              VCS="bitbucket"
-            else
-              VCS="gitlab"
-            fi
-            echo "VCS: $VCS"
-      - run:
-          name: Record Workflow Metrics event (CTO.ai)
-          command: |
-            curl --location --request POST "https://events.stg.cto.ai" \
-              --header "`echo 'Authorization: Bearer' <<parameters.token>>`"\
-              --header 'Content-Type: application/json'\
-              --header "x-ops-mechanism: circle-ci-${VCS}"\
-              --data "{
-                \"repo\":\"<<parameters.repo>>\",
-                \"branch\":\"<<parameters.branch>>\",
-                \"commit\":\"<<parameters.commit>>\",
-                \"image\":\"<<parameters.image>>\",
-                \"environment\":\"<<parameters.environment>>\",
-                \"event_name\":\"<<parameters.event_name>>\",
-                \"event_action\":\"<<parameters.event_action>>\",
-                \"team_id\":\"<<parameters.team_id>>\",
-                \"meta\":{ \"user\":\"<<parameters.user>>\", \"origin\":\"<<parameters.origin>>\" }
-              }"
+      - cto-ai/event:
+          token: eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoWWZ0T0FBN1Aycm9wemVHdlhCREZmQXptLThoS3lCTk5BcHZSSzBJYnhJIn0.eyJqdGkiOiI1MmY2NWU4My01YTA1LTQ0YTYtYjdkZi0zOTA2ZDRjZTg4ZWEiLCJleHAiOjE2ODYxODQ1MzQsIm5iZiI6MCwiaWF0IjoxNjgzNTkyNTM0LCJpc3MiOiJodHRwczovL3d3dy5zdGctcGxhdGZvcm0uaGMuYWkvYXV0aC9yZWFsbXMvb3BzIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImQwMjhlMGQzLTg3NjEtNDQ5Ni05ZDBiLWNmMTgxZjNlYjZmYyIsInR5cCI6IkJlYXJlciIsImF6cCI6Ind3dyIsIm5vbmNlIjoiNGZkM2FjODMtOTlkYi00MzhmLWEwNGUtNjQ5ZmQ0YjFlMWZkIiwiYXV0aF90aW1lIjoxNjgyMTE4MTA0LCJzZXNzaW9uX3N0YXRlIjoiMmYxZWMyNzItNDJjMC00M2Q2LTlmNGUtM2U0ZWZiZjEzOWM3IiwiYWNyIjoiMCIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL3d3dy5zdGctcGxhdGZvcm0uaGMuYWkiLCJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJodHRwOi8vMTI3LjAuMC4xOjgwODAiLCJodHRwOi8vbG9jYWxob3N0OjgwODEiLCJodHRwOi8vbG9jYWxob3N0OjMwMzAiLCJodHRwczovL3N0Zy12Mi5jdG8uYWkiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5hbWUiOiJNYXJjbyBHdWlsbMOpbiIsInByZWZlcnJlZF91c2VybmFtZSI6Im1hcmNvLmd1aWxsZW4iLCJnaXZlbl9uYW1lIjoiTWFyY28iLCJmYW1pbHlfbmFtZSI6Ikd1aWxsw6luIiwiZW1haWwiOiJtYXJjby5ndWlsbGVuQGN0by5haSJ9.SqHz1iNcxnM5Vg8443Cwf4vW7nTBwMylf5B2GzTuqkU-onZuDavIEGi2lzoIdMjlnhFGdo78VZVSfJTGy20s4IwQh-Cy0PUpEk64SxXOcHlX88K4Z9e0AoWqZZDC46lwROueD00IwL8R_JaQMShFqWrtAUfTw-JG-IyGidQPOuELJgaqCQiLKsfpfhn6YwbLK63ST4NGxRttor9Fsi-H7BKj93RU-HybxpM17I0hzIFyhgxx3hNwD9fRCzPTS8WboJo5HeldDMl1bzphZcVspha3pwB1ONFegdeJzHMhM3hWLTmL6bB4dVKPURs48GWM9vHUVKvadZ3vrqdMw0F3Aw
+          team_id: cd14278e-9c0c-4d95-9cc3-63ff0389a728
+          image: app78df3bl2
+          environment: staging
+          event_name: deployment
+          event_action: succeeded
+          origin: circleci-orb
 
-# Orchestrate jobs using workflows
-# See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  events_example_workflow:
     jobs:
-      - say-hello
+      - events_example_job
