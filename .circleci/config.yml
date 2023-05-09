@@ -17,7 +17,7 @@ jobs:
             event_name: deployment
             event_action: succeeded
             origin: circleci-orb2
-            vcs_type: gitlab
+            vcs_type: github
             branch: main
             repo: marcoguillenuio/marcoguillenuio-orb
             user: marcoguillenuio
