@@ -7,60 +7,6 @@ orbs:
 filters: &filters
   tags:
     only: /.*/
-
-# Define a job to be invoked later in a workflow.
-# See: https://circleci.com/docs/configuration-reference/#jobs
-jobs:
-  test:
-    parameters:
-      token:
-        type: string
-        default: ""
-      team_id:
-        type: string
-        default: ""
-      repo:
-        type: string
-        default: "${CIRCLE_PROJECT_REPONAME}"
-      branch:
-        type: string
-        default: "${CIRCLE_BRANCH}"
-      commit:
-        type: string
-        default: "${CIRCLE_SHA1}"
-      vcs_url:
-        type: string
-        default: "${CIRCLE_REPOSITORY_URL}"
-      image:
-        type: string
-        default: ""
-      environment:
-        type: string
-        default: ""
-      event_name:
-        type: string
-        default: ""
-      event_action:
-        type: string
-        default: ""
-      user:
-        type: string
-        default: "${CIRCLE_USERNAME}"
-      origin:
-        type: string
-        default: "circleci-orb"
-#    steps:
-#      - run:
-#          name: "Get VCS"
-#          command: |
-#            if [[ "$CIRCLE_REPOSITORY_URL" == *"github.com"* ]]; then
-#              VCS="github"
-#            elif [[ "$CIRCLE_REPOSITORY_URL" == *"bitbucket.org"* ]]; then
-#              VCS="bitbucket"
-#            else
-#              VCS="gitlab"
-#            fi
-#            echo "VCS: $VCS"
 workflows:
   lint-pack:
     jobs:
