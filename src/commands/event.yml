@@ -1,0 +1,65 @@
+description: >
+  Send workflow events to CTO.ai to enable Workflow Metrics.
+parameters:
+  token:
+    type: string
+  team_id:
+    type: string
+  repo:
+    type: string
+    default: "${CIRCLE_PROJECT_REPONAME}"
+  branch:
+    type: string
+    default: "${CIRCLE_BRANCH}"
+  commit:
+    type: string
+    default: "${CIRCLE_SHA1}"
+  image:
+    type: string
+    default: ""
+  environment:
+    type: string
+    default: ""
+  event_name:
+    type: string
+    default: ""
+  event_action:
+    type: string
+    default: ""
+  user:
+    type: string
+    default: "${CIRCLE_USERNAME}"
+  origin:
+    type: string
+    default: "circleci-orb"
+
+steps:
+  - run:
+      name: Get VCS
+      command: |
+        if [[ "$CIRCLE_REPOSITORY_URL" == *"github.com"* ]]; then
+          VCS="github"
+        elif [[ "$CIRCLE_REPOSITORY_URL" == *"bitbucket.org"* ]]; then
+          VCS="bitbucket"
+        else
+          VCS="gitlab"
+        fi
+        echo "VCS: $VCS"
+  - run:
+      name: Record Workflow Metrics event (CTO.ai)
+      command: |
+        curl --location --request POST "https://events.stg.cto.ai" \
+          --header "`echo 'Authorization: Bearer' <<parameters.token>>`"\
+          --header 'Content-Type: application/json'\
+          --header "x-ops-mechanism: circle-ci-${VCS}"\
+          --data "{
+            \"repo\":\"<<parameters.repo>>\",
+            \"branch\":\"<<parameters.branch>>\",
+            \"commit\":\"<<parameters.commit>>\",
+            \"image\":\"<<parameters.image>>\",
+            \"environment\":\"<<parameters.environment>>\",
+            \"event_name\":\"<<parameters.event_name>>\",
+            \"event_action\":\"<<parameters.event_action>>\",
+            \"team_id\":\"<<parameters.team_id>>\",
+            \"meta\":{ \"user\":\"<<parameters.user>>\", \"origin\":\"<<parameters.origin>>\" }
+          }"
