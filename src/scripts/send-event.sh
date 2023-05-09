@@ -10,7 +10,7 @@ else
 fi
 echo "VCS: $VCS"
 
-echo "111 TOKEN' ${TOKEN}"
+echo "111  TOKEN' ${TOKEN}"
 echo "222 VCS' ${VCS}"
 
 curl --location --request POST "https://events.stg.cto.ai" \
