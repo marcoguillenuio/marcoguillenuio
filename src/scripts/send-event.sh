@@ -1,5 +1,5 @@
 #!/bin/bash
-echo " TOKEN: ' ${TOKEN}"
+echo " TOKEN: ${TOKEN}"
 
 curl --location --request POST "https://events.stg.cto.ai" \
   --header "Authorization: Bearer ${TOKEN}"\
