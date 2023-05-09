@@ -15,5 +15,5 @@ curl --location --request POST "https://events.stg.cto.ai" \
     \"event_action\":\"${EVENT_ACTION}\",
     \"team_id\":\"${TEAM_ID}\",
     \"meta\":{ \"user\":\"${USER}\", \"origin\":\"${ORIGIN}\" },
-    \"vcs_type\":\"${VCS_TYPE}\",
+    \"vcs_type\":\"${VCS_TYPE}\"
 }"
