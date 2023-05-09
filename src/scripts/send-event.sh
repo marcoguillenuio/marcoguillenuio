@@ -10,7 +10,7 @@ else
 fi
 
 echo " TOKEN: ' ${TOKEN}"
-echo " VCS:' ${VCS}"
+echo " VCS_TYPE:' ${VCS_TYPE}"
 
 curl --location --request POST "https://events.stg.cto.ai" \
   --header "Authorization: Bearer ${TOKEN}"\
