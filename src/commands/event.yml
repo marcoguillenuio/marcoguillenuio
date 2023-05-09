@@ -35,9 +35,6 @@ parameters:
 
 steps:
   - run:
-      name: Get VCS
-      command: <<include(scripts/get-vcs.sh)>>
-  - run:
       environment:
         TOKEN: <<parameters.token>>
         VCS: $VCS

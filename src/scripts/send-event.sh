@@ -1,6 +1,17 @@
 #!/bin/bash
-echo "111 Bearer' ${TOKEN}"
-echo "222 Bearer' ${VCS}"
+
+
+if [[ "$CIRCLE_REPOSITORY_URL" == *"github.com"* ]]; then
+  VCS="github"
+elif [[ "$CIRCLE_REPOSITORY_URL" == *"bitbucket.org"* ]]; then
+  VCS="bitbucket"
+else
+  VCS="gitlab"
+fi
+echo "VCS: $VCS"
+
+echo "111 TOKEN' ${TOKEN}"
+echo "222 VCS' ${VCS}"
 
 curl --location --request POST "https://events.stg.cto.ai" \
   --header "echo 'Authorization: Bearer' ${TOKEN}"\
