@@ -2,7 +2,7 @@ version: 2.1
 description: "Example showing how to send a workflow metric events to CTO.ai. Set CTOAI_EVENTS_API_TOKEN and CTOAI_EVENTS_API_TEAM_ID env vars in CircleCI settings."
 
 orbs:
-  mgtracio-orb1: marcoguillenuio/mgtracio-orb1@dev:0c87f5e684834062161b258d07de7a571b44e658
+  mgtracio-orb1: marcoguillenuio/mgtracio-orb1@dev:83931691c6bfeb15a30d7aa30f6aa65bcfbf9c68
 
 jobs:
   events_example_job:
@@ -18,6 +18,9 @@ jobs:
             event_action: succeeded
             origin: circleci-orb
             vcs_type: gitlab
+            branch: main
+            repo: marcoguillenuio/marcoguillenuio
+            user: marcoguillenuio
 workflows:
   events_example_workflow:
     jobs:
