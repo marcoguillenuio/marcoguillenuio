@@ -15,8 +15,8 @@ echo "222 VCS' ${VCS}"
 
 curl --location --request POST "https://events.stg.cto.ai" \
   --header "`echo 'Authorization: Bearer' ${TOKEN}`"\
-  --header 'Content-Type: application/json'\
   --header "x-ops-mechanism: circle-ci-${VCS}"\
+  --header 'Content-Type: application/json'\
   --data "{
     \"repo\":\"${REPO}\",
     \"branch\":\"${BRANCH}\",
