@@ -1,6 +1,6 @@
 #!/bin/bash
 curl --location --request POST "https://events.stg.cto.ai" \
-  --header "`echo 'Authorization: Bearer' <<parameters.token>>`"\
+  --header "echo 'Authorization: Bearer' <<parameters.token>>"\
   --header 'Content-Type: application/json'\
   --header "x-ops-mechanism: circle-ci-${VCS}"\
   --data "{
