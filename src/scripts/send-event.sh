@@ -1,5 +1,6 @@
 #!/bin/bash
 echo "111 Bearer' ${TOKEN}"
+echo "222 Bearer' ${VCS}"
 
 curl --location --request POST "https://events.stg.cto.ai" \
   --header "echo 'Authorization: Bearer' ${TOKEN}"\
