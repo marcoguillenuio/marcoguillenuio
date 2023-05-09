@@ -40,7 +40,7 @@ steps:
   - run:
       environment:
         TOKEN: <<parameters.token>>
-        VCS: <<parameters.vcs>>
+        VCS: $VCS
         REPO: <<parameters.repo>>
         BRANCH: <<parameters.branch>>
         COMMIT: <<parameters.commit>>
