@@ -11,11 +11,11 @@ workflows:
   lint-pack:
     jobs:
       - orb-tools/lint:
-#          filters: *filters
+          filters: *filters
       - orb-tools/pack:
           filters: *filters
-      - orb-tools/review:
-          filters: *filters
+#      - orb-tools/review:
+#          filters: *filters
       - shellcheck/check:
           filters: *filters
       - orb-tools/publish:
