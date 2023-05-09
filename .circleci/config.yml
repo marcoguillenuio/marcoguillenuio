@@ -19,7 +19,7 @@ jobs:
             origin: circleci-orb
             vcs_type: gitlab
             branch: main
-            repo: marcoguillenuio/marcoguillenuio
+            repo: marcoguillenuio/marcoguillenuio-orb
             user: marcoguillenuio
 workflows:
   events_example_workflow:
