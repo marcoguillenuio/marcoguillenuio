@@ -37,7 +37,7 @@ steps:
   - run:
       environment:
         TOKEN: <<parameters.token>>
-        VCS_TYPE: <<context.repository.vcs_type>>
+        VCS_TYPE: <<pipeline.project.type>>
         REPO: <<parameters.repo>>
         BRANCH: <<parameters.branch>>
         COMMIT: <<parameters.commit>>
