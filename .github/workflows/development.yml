@@ -37,7 +37,7 @@ jobs:
 
       - name: Report Deployment Succeeded
         if: ${{ success() }}
-        # uses: cto-ai/action@vx.y.z1
+        # uses: cto-ai/action@vx.y.z2
         uses: cto-ai/action@ef01e83cedc4ba0c393865db1e126dfcf6f65498
         with:
           team_id: "abcfde0a-4a95-4d1c-9261-2b4c195b55b6"
