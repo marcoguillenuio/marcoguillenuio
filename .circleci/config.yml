@@ -17,6 +17,8 @@ jobs:
             event_action: succeeded
             repo: marcoguillenuio/prod-circleci-orb
             user: marcoguillenuio
+            branch: branchtest
+            commit: 123
 workflows:
   events_example_workflow:
     jobs:
