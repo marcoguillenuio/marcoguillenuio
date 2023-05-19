@@ -2,23 +2,20 @@ version: 2.1
 description: "Example showing how to send a workflow metric events to CTO.ai. Set CTOAI_EVENTS_API_TOKEN and CTOAI_EVENTS_API_TEAM_ID env vars in CircleCI settings."
 
 orbs:
-  mgtracio-orb1: marcoguillenuio/mgtracio-orb1@dev:83931691c6bfeb15a30d7aa30f6aa65bcfbf9c68
-
+  cto-ai: cto-ai/cto-ai@1.0.3
 jobs:
   events_example_job:
     docker:
       - image: cimg/base:stable
     steps:
-        - mgtracio-orb1/event:
+        - cto-ai/event:
             token: eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJoWWZ0T0FBN1Aycm9wemVHdlhCREZmQXptLThoS3lCTk5BcHZSSzBJYnhJIn0.eyJqdGkiOiIwZDM1ZmZkNC1lMGIxLTQ5ZWYtYWNkNS00YjdmMzFlM2M3OWMiLCJleHAiOjE2ODY0OTc0NTIsIm5iZiI6MCwiaWF0IjoxNjgzOTA1NDUyLCJpc3MiOiJodHRwczovL3d3dy5zdGctcGxhdGZvcm0uaGMuYWkvYXV0aC9yZWFsbXMvb3BzIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjNkNjc4MmZlLTY4M2YtNDcxMS05Y2E4LTMxY2Y2ZTBmOTFlMCIsInR5cCI6IkJlYXJlciIsImF6cCI6Ind3dyIsIm5vbmNlIjoiMGNhMzFkYzctOTNjYS00NDAyLWE3MzAtZTQ1ODc2OGM5NWJhIiwiYXV0aF90aW1lIjoxNjgzOTA0NzI5LCJzZXNzaW9uX3N0YXRlIjoiOGVlODAyNTktOWNmMS00NjRlLWEyNjgtOTk0YjA4MDVlNTQzIiwiYWNyIjoiMCIsImFsbG93ZWQtb3JpZ2lucyI6WyJodHRwczovL3d3dy5zdGctcGxhdGZvcm0uaGMuYWkiLCJodHRwOi8vbG9jYWxob3N0OjgwODAiLCJodHRwOi8vMTI3LjAuMC4xOjgwODAiLCJodHRwOi8vbG9jYWxob3N0OjgwODEiLCJodHRwOi8vbG9jYWxob3N0OjMwMzAiLCJodHRwczovL3N0Zy12Mi5jdG8uYWkiXSwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOmZhbHNlLCJuYW1lIjoiTWFyY28gTWVuYSIsInByZWZlcnJlZF91c2VybmFtZSI6Im1ndHJhY2lvIiwiZ2l2ZW5fbmFtZSI6Ik1hcmNvIiwiZmFtaWx5X25hbWUiOiJNZW5hIiwiZW1haWwiOiJtZ3VpbGxlbi5kZXZlbG9wZXJAZ21haWwuY29tIn0.QtOsm8o1VNOVhdAKdjhFoX4GkixnQ-2O01ge7I1zjgmMKX1txj7cLs8ZRNOXmlYDRApubmFxa3Ls2kIATA-yv21-WrgEgrQ765HqycdLdljG3leC8wMqLE1Gy1odbwkatLFxPHA-Az0urB88W1ZbtJndpIYfQBw6yhfRE4pjCa2-LHL-HEpiMh7TR-xOZeaHkq1U-i0HY1mLFxwn3A1V5MLWXZRLbY4h1XY2KkySQG4mqfaGMHotrwblupcx26dhn84j82QuXgWqn6cSkKUgwodaFmup0elgZeYJPIahlfUI7m-nfNcJqKhG-GmBxPj8GK5mD24sxlqlYb1adA5R1Q
             team_id: abcfde0a-4a95-4d1c-9261-2b4c195b55b6
             image: app78df3ba2
             environment: staging
             event_name: deployment
             event_action: succeeded
-            vcs_type: bitbucket
-            branch: main
-            repo: marcoguillenuio/demo-circleci-orb
+            repo: marcoguillenuio/prod-circleci-orb
             user: marcoguillenuio
 workflows:
   events_example_workflow:
