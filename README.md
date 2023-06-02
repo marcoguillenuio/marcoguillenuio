@@ -11,13 +11,13 @@ This repository is designed to be automatically ingested and modified by the Cir
 
 _**Edit this area to include a custom title and description.**_
 
----
+----
 
 ## Resources
 
 [CircleCI Orb Registry Page](https://circleci.com/orbs/registry/orb/marcoguillenuio/mgtracio-orb1) - The official registry page of this orb for all versions, executors, commands, and jobs described.
 
-[CircleCI Orb Docs](https://circleci.com/docs/2.0/orb-intro/#section=configuration) - Docs for using, creating, and publishing CircleCI Orbs.
+[CircleCI Orb Docs](https://circleci.com/docs/2.0/orb-intro/#section=configuration) - D.ocs for using, creating, and publishing CircleCI Orbs.
 
 ### How to Contribute
 
