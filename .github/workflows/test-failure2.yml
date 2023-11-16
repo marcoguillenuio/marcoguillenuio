@@ -1,0 +1,11 @@
+name: Github Job Deployment Fail Test2
+on:
+  workflow_dispatch:
+jobs:
+  test-failure2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Deployment Failed'
+        run: |
+          echo "Failed Deployment"
+          exit 1
