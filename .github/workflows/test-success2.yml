@@ -1,4 +1,4 @@
-name: Job Deployment Success - 2 Step2
+name: Job Deployment Success - 2 Steps
 on:
   workflow_dispatch:
 jobs:
