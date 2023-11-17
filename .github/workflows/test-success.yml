@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: 'Deployment Success - Single Step'
-        run: |
-          echo "Success Deployment"
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
