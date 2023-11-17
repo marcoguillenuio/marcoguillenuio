@@ -6,6 +6,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: 'Deployment Success - Single Step'
+      - name: 'Deployment Success - Step1'
         run: |
-          echo "Success Deployment"
+          echo "Step1"
+      - name: 'Deployment Success - Step2'
+        run: |
+          echo "Step2"
