@@ -1,4 +1,4 @@
-name: Github Job Deployment Success - Single Step
+name: Job Deployment Success - Single Step
 on:
   workflow_dispatch:
 jobs:
