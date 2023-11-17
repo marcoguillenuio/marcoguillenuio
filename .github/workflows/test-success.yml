@@ -1,4 +1,4 @@
-name: Github Job Deployment Success Test
+name: Github Job Deployment Success - Single Step
 on:
   workflow_dispatch:
 jobs:
@@ -6,6 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     steps:
-      - name: 'Deployment Success'
+      - name: 'Deployment Success - Single Step'
         run: |
           echo "Success Deployment"

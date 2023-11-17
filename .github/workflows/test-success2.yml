@@ -1,4 +1,4 @@
-name: Github Job Deployment Success Test2
+name: Github Job Deployment Success - Multiple Steps
 on:
   workflow_dispatch:
 jobs:
