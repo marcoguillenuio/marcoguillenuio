@@ -5,7 +5,7 @@
 
 
 
-A project template for Orbs......x1..............................3
+A project template for Orbs......x1..............................3.
 
 
 
