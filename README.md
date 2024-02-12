@@ -5,7 +5,7 @@
 
 
 
-A project template for Orbs..a5.......
+A project template for Orbs..a5........
 
 
 This repository is designed to be automatically ingested and modified by the CircleCI CLI's `orb init` command.
